@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <STYLE>
+        table{
+            border: 3px dotted grey;
+            padding: 20px;
+            margin: 100px;
+            margin-left:450px;
+        }
+        .stu_form{
+            gap:16px;
+        }
+        input:focus{
+            border: 2px solid black;
+        }
+        .error{
+            color:red;
+            font-size:16px;        }
+        .success{
+            color:green;
+            font-size:16px;}
+    </STYLE>
+</head>
+<body>
+
+    <form class="stu_form" onsubmit="return submission()">
+    <table> 
+        <tr>
+            <td>
+                <label for="sname">Student Name
+                    <input type="text" id="sname" autofocus>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="mail">Email ID
+                    <input type="email" id="mail" autofocus>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="num">Mobile Number
+                    <input type="number" id="num" autofocus>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for ="m_gen" name="sel_gen">
+                    <input type="radio" id="m_gen" name="sel_gen" >Male</label>
+                <label for ="f_gen" name="sel_gen">
+                    <input type="radio" id="f_gen" name="sel_gen" autofocus>Female</label>
+                </td>
+        </tr>
+        <tr>
+            <td>
+                <select id ="course">
+                   <option value="">Select Course</option>
+        <option>Java</option>
+        <option>Python</option>
+        <option>Web Development</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="box">
+                    <input type="checkbox" id="box" autofocus>Terms & Conditions
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+        <p id="message"></p>
+</table>
+</form> 
+ 
+</body>
+<script>
+  function submission(){
+    let msg = document.getElementById("message");
+    let name = document.getElementById("sname").value.trim();
+    let email = document.getElementById("mail").value.trim();
+    let mobile = document.getElementById("num").value.trim();
+    let gender = document.querySelector("input[name=sel_gen]:checked");
+    let course = document.getElementById("course").value;
+    let terms = document.getElementById("box").checked;
+    
+        if(name ==""){
+            msg.textContent="Plese enter your name";
+            msg.className ="error";
+            return false;
+        }
+        if(!email.includes("@")){
+            msg.textContent="Please enter a valid email ID";
+             msg.className ="error";
+            return false;
+        }
+        if(mobile.length !=10 || isNaN(mobile)){
+            msg.textContent="Please enter a valid mobile number";
+             msg.className ="error";
+            return false;}
+        if(!gender){
+            msg.textContent="Please select your gender";
+             msg.className ="error";
+            return false;
+        }
+        if(course ==""){
+            msg.textContent="Please select a course";
+             msg.className ="error";
+            return false;
+        }
+        if(!terms){
+            msg.textContent="Please accept the terms and conditions";
+             msg.className ="error";
+            return false;
+        }
+        msg.textContent="Form submitted successfully!";
+        msg.className ="success";
+        document.querySelector(".stu_form").reset();
+        return false;
+    }
+</script>
+</html>
